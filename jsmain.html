@@ -1,0 +1,55 @@
+<!-- CRUD operations on table using JSP -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD operations on table</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+    function deleteData(cashierID)
+    {
+        var choice = confirm('Do you really want to delete this ' + cashierID + ' record?');
+        if (choice == true)
+        {
+            $("#deleteData").load("delete.jsp?CashierID=" + cashierID);
+            alert('Record deleted Successfully');
+	        showData();
+        }
+    }
+	function SaveData()
+	{
+		$("#saveData").load("insert.jsp?CashierID=" + document.getElementById('CashierID').value + '&CashierName=' + document.getElementById('CashierName').value);
+			alert('Record inserted/updated Successfully');
+			showData();
+	}
+</script>
+<script>
+	function showData()
+	{
+		$("#loadAllRecords").load("display.jsp");
+	}
+</script>
+</head>
+<body onload = "showData()">
+	<center>
+		<p>
+			<label for="CashierID">Cashier ID:</label>
+			<input type="text" name="CashierID" id="CashierID">
+		</p>
+		<p>
+			<label for="CashierName">Cashier Name:</label>
+			<input type="text" name="CashierName" id="CashierName">
+		</p>
+	<button  onclick="SaveData(); showData()" type="button" class="btn btn-default btn-sm">
+	<span class="glyphicon glyphicon-floppy-save"></span> Save Data
+    </button>
+	<div id = "saveData"></div>
+	<div id = "loadAllRecords"></div>
+	<div id = "deleteData"></div>
+</center>
+</body>
+</html>

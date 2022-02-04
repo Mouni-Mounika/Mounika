@@ -1,0 +1,24 @@
+<!-- Displaying data of a given table name -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show data</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	</script>
+
+	<script>
+		function ShowData()
+		{
+			$('#tableData').load("showdata.php?tablename=" + document.getElementById('tableName').value); 
+		}
+
+	</script>
+</head>
+<body>
+	<input type = "text" id ="tableName">
+	<button onclick = "ShowData()">Show data</button>
+	<div id = 'tableData'></div>
+
+
+</body>
+</html>

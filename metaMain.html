@@ -1,0 +1,33 @@
+<!-- Displaying data of a given table name -->
+<html> 
+<head>
+	<title>Display Table</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	</script>
+
+	<script>
+		function ShowData()
+		{
+			$('#tableData').load("displayTable.php?tableName=" + document.getElementById('tableName').value); 
+		}
+	</script>
+	<script>
+		 function deleteData(itemID)
+	    {
+	        var choice = confirm('Do you really want to delete this ' + itemID + ' record?');
+	        if (choice == true)
+	        {
+	            $('#deleteData').load('deleteData.php?ItemID=' + itemID);
+	            alert('Record deleted Successfully');
+		        showData();
+	        }
+	    }
+	</script>
+</head>
+<body>
+<body>
+	<input type = "text" id ="tableName">
+	<button onclick = "ShowData()">Show</button>
+	<div id = 'tableData'></div>
+</body>
+</html>

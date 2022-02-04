@@ -1,0 +1,58 @@
+<!-- CRUD operations on table using PHP-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD operations on table</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	</script>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet';
+    href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css'>
+    <script>
+    function deleteData(cashierID)
+    {
+        var choice = confirm('Do you really want to delete this ' + cashierID + ' record?');
+        if (choice == true)
+        {
+            $('#deleteData').load('delete.php?CashierID=' + cashierID);
+            alert('Record is deleted Successfully');
+	        showData();
+        }
+    }
+	function SaveData()
+	{
+		$("#itemTableData").load("insert.php?CashierID=" + document.getElementById('CashierID').value + '&CashierName=' + document.getElementById('CashierName').value);
+			alert('Record inserted/updated Successfully');
+			showData();
+	}
+
+	function showData()
+	{
+		$("#LoadTableData").load("display.php");
+	}
+	</script>
+	<script>
+	</script>
+</head>
+<body onload = "showData()">
+	<center>
+	<div id = 'deleteData'></div>
+	<p>
+			<label for="CashierID">Cashier ID:</label>
+			<input type="text" name="CashierID" id="CashierID">
+		</p>
+		<p>
+			<label for="CashierName">Cashier Name:</label>
+			<input type="text" name="CashierName" id="CashierName">
+		</p>
+	<button  onclick="SaveData(); showData()" type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-floppy-save"></span> Save Data
+        </button>
+	<div id = "itemTableData"></div>
+	<div id = "LoadTableData"></div>
+</center>
+</body>
+</html>

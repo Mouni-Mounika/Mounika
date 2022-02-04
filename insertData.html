@@ -1,0 +1,57 @@
+<!-- Insert data into item table -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inert Data into the item table</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	</script>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css'>
+    <script>
+    function deleteData(itemID)
+    {
+        var choice = confirm('Do you really want to delete this ' + itemID + ' record?');
+        if (choice == true)
+        {
+            $('#deleteData').load('deleteData.php?ItemID=' + itemID);
+            alert('Record deleted Successfully');
+	        showData();
+        }
+        
+    }
+   
+	function SaveData()
+	{
+		$("#itemTableData").load("insertData.php?ItemID=" + document.getElementById('ItemID').value + '&ItemDescription=' + document.getElementById('ItemDescription').value + '&UnitPrice=' + document.getElementById('UnitPrice').value + '&StockQuantity=' + document.getElementById('StockQuantity').value + '&SupplierID=' + document.getElementById('SupplierID').value);
+			alert('Record inserted/updated Successfully');
+			showData();
+	}
+
+	function showData()
+	{
+		$("#LoadTableData").load("showData2.php");
+	}
+	</script>
+	<script>
+
+	</script>
+
+	
+</head>
+<body onload = "showData()">
+	
+	<div id = 'deleteData'></div>
+	<input type="text" id = "ItemID" name="ItemID" placeholder="Enter item ID">
+	<input type="text" id = "ItemDescription" name = "ItemDescription" placeholder="Enter item description"><br><br>
+	<input type="number" id  = "UnitPrice" name="UnitPrice" placeholder="Enter unit price">
+	<input type="number" id = "StockQuantity" name="StockQuantity" placeholder="Enter stock quantity"><br><br>
+	<input type="text" id = "SupplierID" name="SupplierID" placeholder="Enter supplier ID">
+	<button  onclick="SaveData(); showData()" type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-floppy-save"></span> Save Data
+        </button>
+	<div id = "itemTableData"></div>
+	<div id = "LoadTableData"></div>
+</body>
+</html>

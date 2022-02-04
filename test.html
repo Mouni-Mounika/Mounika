@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+#div {
+  float: left;
+  width: 400px;
+  height: 400px;
+  padding: 10px;
+  margin-left: 20px;
+  border: 2px solid black;
+}
+#code {
+  float: left;
+  width: 400px;
+  height: 400px;
+  margin-left: 30px;
+  padding: 10px;
+  border: 2px solid black;
+}
+</style>
+<script>
+	function allowDrop(ev) 
+	{
+	  ev.preventDefault();
+	}
+
+	function drag(ev) 
+	{
+	  ev.dataTransfer.setData("text", ev.target.id);
+	}
+
+	function drop(ev) 
+	{
+		ev.preventDefault();
+		var data = ev.dataTransfer.getData("text");
+		var element;
+		element = document.createElement("INPUT");
+		if (data.includes("button"))
+		{
+			element.setAttribute("type", "button");
+			element.setAttribute("value", "button");
+		}
+		else
+		{
+			element.setAttribute("type", "text");
+		}
+		ev.target.append(element);
+		code.innerHTML += "<br>";
+		div.innerHTML += "<br>";
+		document.getElementById("code").append("\n"+element.outerHTML);
+	}
+
+	function saveCode()
+	{
+		var htmlCode = document.getElementById("code");
+		var head = "<!DOCTYPE HTML><html><body>";
+		var tail = "</body></html>";
+		var htmlCode = [head + htmlCode.textContent + tail];
+		var bl = new Blob(htmlCode, {type: "text/html;charset=utf-8"});
+		var a = document.createElement("a");
+		a.href = URL.createObjectURL(bl);
+		a.download = "DragAndDrop.html";
+		a.hidden = true;
+		document.body.appendChild(a);
+		a.click();
+	}
+
+</script>
+</head>
+	<body>
+	<center>
+	<h1>Drag and Drop IDE</h1>
+	<div style = "float:left;">
+		<img src = "https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/8a19241172dc1f8.png" name = "textbox" id = "textbox" class = "drag" draggable="true" ondragstart="drag(event)" width = "200px"><br>
+		<img src = "https://openclipart.org/image/2400px/svg_to_png/220003/html-simple-button-cleaned.png" name = "button" id = "button" class = "drag" draggable="true" ondragstart="drag(event)"  width = "200px">
+	</div>
+	<div id="div" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+	<div id="code" ondrop="drop(event)">	</div>
+
+	<div style = " padding: 10px; float: right; margin-top: 10px; margin-right: 570px; ">
+	<input type = button id = "savebutton"  value = "Save"onclick = "saveCode();">
+	</div>
+	<br>
+	</center>
+	</body>
+</html>

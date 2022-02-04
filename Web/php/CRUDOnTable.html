@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD operations on table</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	</script>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css'>
+    <script>
+    function deleteData(cashierID)
+    {
+        var choice = confirm('Do you really want to delete this ' + cashierID + ' record?');
+        if (choice == true)
+        {
+            $('#deleteData').load('deleteRecord.php?CashierID=' + cashierID);
+            alert('Record deleted Successfully');
+	        showData();
+        }
+    }
+   
+	function SaveData()
+	{
+		$("#itemTableData").load("insertRecord.php?CashierID=" + document.getElementById('CashierID').value + '&CashierName=' + document.getElementById('CashierName').value);
+			alert('Record inserted/updated Successfully');
+			showData();
+	}
+
+	function showData()
+	{
+		$("#loadAllRecords").load("displayRecords.php");
+	}
+	</script>
+
+	
+</head>
+<body onload = "showData()">
+	
+	<div id = 'deleteRecord'></div>
+	<input type="text" id = "CashierID" name="CashierID" placeholder="Enter cashier ID">
+	<input type="text" id = "CashierName" name="CashierName" placeholder="Enter cashier name ">
+	<button onclick="SaveData(); showData()">Save Data</button>
+	<div id = "itemTableData"></div>
+	<div id = "loadAllRecords"></div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Cashier's Details</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		function saveData()
+		{
+			$("#insertdetails").load("insert.php?CashierID=" + document.getElementById('CashierID').value + "&CashierName=" + document.getElementById('CashierName').value);
+			// $("#details").load("showData.php?")
+			getDetails();
+		}
+	</script>
+	<script>
+		function getDetails()
+		{
+			$("#details").load("displayData.php?")
+		}
+	</script>
+</head>
+<body >
+	<!-- <form action="show.php" method="post"> -->
+	<center>
+		<h1>Storing Form data in Database</h1>
+		<!-- <form action="insert.php" method="post"> -->
+		<p>
+			<label for="CashierID">Cashier ID:</label>
+			<input type="text" name="CashierID" id="CashierID">
+		</p>
+		<p>
+			<label for="CashierName">Cashier Name:</label>
+			<input type="text" name="CashierName" id="CashierName">
+		</p>
+		<button onclick="saveData();">Save</button>
+			<div id="insertdetails"></div>
+			<div id="details"></div>
+		<!-- </form> -->
+	</center>
+</body>
+
+</html>
